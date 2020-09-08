@@ -1,0 +1,19 @@
+
+<launch>
+
+    <!--TURTLEBOT3_MODEL=[burger, waffle, waffle_pi]/-->
+
+  <include file="$(find my_robot)/launch/world.launch"/>
+
+  <include file="$(find robot_pose_ekf)/robot_pose_ekf.launch"/>
+
+  <include file="$(find odom_to_trajectory)/launch/create_trajectory.launch"/>
+
+  <include file="$(find main)/launch/rviz_launch.launch"/>
+
+  <node pkg="rqt_multiplot" type="rqt_multiplot" name="rqt_multiplot" />
+  <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop" output="screen"/>
+
+  <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0 0 0 0 1 robot_footprint imu 100 " />
+
+</launch>
